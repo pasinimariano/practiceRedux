@@ -5,28 +5,25 @@ import { Link } from 'react-router-dom';
 
 
 const Personaje = (props) => {
-    const component
-    console.log(component)
+
     useEffect(() => {
         props.getInfo()
-        component =
-            <div>
-                <h2>{props.detallePersonaje[0].name}</h2>
-                <img src={props.detallePersonaje[0].image} />
-                <h2>{props.detallePersonaje[0].species}</h2>
-                <h2>{props.detallePersonaje[0].gender}</h2>
-                <Link to='/'>
-                    <button>A CASA</button>
-                </Link>
-            </div>
     }, [])
 
     return (
         <div>
-            {!component ? (
+            {!props.detallePersonaje[0] ? (
                 <h2> LOADING...</h2>
             ) : (
-                {component}
+                <div>
+                    <h2>{props.detallePersonaje[0].name}</h2>
+                    <img src={props.detallePersonaje[0].image}/>
+                    <p>{props.detallePersonaje[0].species}</p>
+                    <p>{props.detallePersonaje[0].gender}</p>
+                    <Link to='/'>
+                        <button> Home </button>
+                    </Link>
+                </div>
             )}
         </div>
     )
