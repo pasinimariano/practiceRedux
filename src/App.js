@@ -1,23 +1,27 @@
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
+import { Link, Route } from 'react-router-dom';
 import './App.css';
+import Personaje from './Personaje.js';
 
 function App() {
+  const [state, setState] = useState([]);
+
+  useEffect(() => {
+    fetch('https://rickandmortyapi.com/api/character/384')
+      .then(respuesta => respuesta.json())
+      .then(json => {
+        setState(json.image)
+      })
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Route exact path='/'>
+        <Link to='/personaje'>
+          <img src={state} />
+        </Link>
+      </Route>
+      <Route exact path='/personaje' component={Personaje} />
     </div>
   );
 }
